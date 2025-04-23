@@ -1,4 +1,4 @@
-package com.example.clase4;
+package com.example.lab2;
 
 import org.junit.Test;
 
