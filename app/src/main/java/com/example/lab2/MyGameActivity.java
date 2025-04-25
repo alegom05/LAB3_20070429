@@ -32,7 +32,7 @@ public class MyGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.activity_trivia);
 
         tvTema = findViewById(R.id.tvTema); // Ahora mostrará "Juego N"
         tvIntentos = findViewById(R.id.tvIntentos);
