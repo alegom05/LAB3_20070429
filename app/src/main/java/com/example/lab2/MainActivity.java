@@ -1,88 +1,104 @@
-package com.example.lab2;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.lab3;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.lab2.R;
+import com.example.lab2.TriviaActivity;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String TAG = "MAINACTDEBUG";
-    Button btnSoftware, btnCiber, btnOpticas;
+    AutoCompleteTextView categoryDropdown, difficultyDropdown;
+    TextInputEditText amountInput;
+    Button checkConnectionButton, startButton;
 
-
-
-    public boolean isInternetAvailable(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnected();
-    }
-
-
-
+    String[] categorias = {"Cultura General", "Libros", "Películas", "Música", "Computación", "Matemática", "Deportes", "Historia"};
+    String[] dificultades = {"fácil", "medio", "difícil"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "oncreate");
 
-        Button btnComenzar = findViewById(R.id.btnComenzar);
+        categoryDropdown = findViewById(R.id.categoryDropdown);
+        difficultyDropdown = findViewById(R.id.difficultyDropdown);
+        amountInput = findViewById(R.id.amountInput);
+        checkConnectionButton = findViewById(R.id.checkConnectionButton);
+        startButton = findViewById(R.id.startButton);
 
+        // Adaptadores para los dropdowns
+        ArrayAdapter<String> adapterCategoria = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, categorias);
+        categoryDropdown.setAdapter(adapterCategoria);
 
-        View btnComprobarConexion = null;
-        btnComprobarConexion.setOnClickListener(v -> {
+        ArrayAdapter<String> adapterDificultad = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, dificultades);
+        difficultyDropdown.setAdapter(adapterDificultad);
+
+        startButton.setEnabled(false);
+
+        checkConnectionButton.setOnClickListener(v -> {
             if (validarEntradas()) {
-                if (isInternetAvailable(this)) {
+                if (hayConexionInternet()) {
                     Toast.makeText(this, "¡Conexión exitosa!", Toast.LENGTH_SHORT).show();
-                    btnComenzar.setEnabled(true);
+                    startButton.setEnabled(true);
                 } else {
-                    Toast.makeText(this, "Sin conexión a Internet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "No tienes conexión a Internet", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-
-
+        startButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, TriviaActivity.class);
+            intent.putExtra("categoria", categoryDropdown.getText().toString());
+            intent.putExtra("cantidad", Integer.parseInt(amountInput.getText().toString()));
+            intent.putExtra("dificultad", difficultyDropdown.getText().toString());
+            startActivity(intent);
+        });
     }
-
 
     private boolean validarEntradas() {
-        // Aquí puedes poner tu lógica para validar, por ejemplo:
-        Spinner spinnerCategoria = findViewById(R.id.spinnerCategoria);
-        Spinner spinnerDificultad = findViewById(R.id.spinnerDificultad);
-        EditText etCantidad = findViewById(R.id.etCantidad);
+        String categoria = categoryDropdown.getText().toString();
+        String dificultad = difficultyDropdown.getText().toString();
+        String cantidadStr = amountInput.getText().toString();
 
-        String categoria = spinnerCategoria.getSelectedItem().toString();
-        String dificultad = spinnerDificultad.getSelectedItem().toString();
-        String cantidad = etCantidad.getText().toString();
+        if (categoria.isEmpty()) {
+            categoryDropdown.setError("Seleccione una categoría");
+            return false;
+        }
 
-        return !categoria.isEmpty() && !dificultad.isEmpty() && !cantidad.isEmpty();
+        if (dificultad.isEmpty()) {
+            difficultyDropdown.setError("Seleccione una dificultad");
+            return false;
+        }
+
+        if (cantidadStr.isEmpty()) {
+            amountInput.setError("Ingrese una cantidad");
+            return false;
+        }
+
+        try {
+            int cantidad = Integer.parseInt(cantidadStr);
+            if (cantidad <= 0) {
+                amountInput.setError("Debe ser mayor que 0");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            amountInput.setError("Ingrese un número válido");
+            return false;
+        }
+
+        return true;
     }
 
-
-    private void abrirJuego(String tema) {
-        Intent intent = new Intent(this, MyGameActivity.class);
-        intent.putExtra("tema", tema);
-        startActivity(intent);
+    private boolean hayConexionInternet() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cm.getActiveNetworkInfo();
+        return info != null && info.isConnected();
     }
-
-
-
-
-
-
-
 }
