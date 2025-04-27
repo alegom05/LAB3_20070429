@@ -1,139 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BBDEFB"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/appTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="¡Bienvenido a TeleTrivia!"
-        android:textSize="32sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/appDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/appTitle"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="24dp"
-        android:gravity="center"
-        android:text="La app diseñada para testear tu conocimiento y retar a tus amigos!\nA continuación, elija los parámetros de juego"
-        android:textSize="16sp" />
+    android:background="#FFFFFF">
 
     <LinearLayout
-        android:layout_width="366dp"
-        android:layout_height="526dp"
-        android:layout_below="@id/appDescription"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="32dp"
-        android:background="#E3F2FD"
-        android:elevation="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tvBienvenida"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Categoría:"
+            android:text="¡Bienvenido a TeleTrivia!"
+            android:textSize="26sp"
+            android:textStyle="bold"
             android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/categoryLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            app:boxBackgroundColor="@android:color/white"
-            app:boxStrokeColor="#2196F3">
-
-            <AutoCompleteTextView
-                android:id="@+id/categoryDropdown"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:hint="Seleccione la categoría"
-                android:inputType="none"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginBottom="8dp"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tvDescripcion"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cantidad:"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:text="La app diseñada para testear tu conocimiento y retar a tus amigos!\nA continuación, elija los parámetros de juego."
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/amountLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            app:boxBackgroundColor="@android:color/white"
-            app:boxStrokeColor="#2196F3">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/amountInput"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:hint="Escriba la cantidad de preguntas"
-                android:inputType="number" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Dificultad:"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/difficultyLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+        <ImageView
+            android:id="@+id/ivSatelite"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_marginBottom="24dp"
-            app:boxBackgroundColor="@android:color/white"
-            app:boxStrokeColor="#2196F3">
+            android:src="@drawable/icantena"
+            android:contentDescription="Imagen de satélite"/>
 
-            <AutoCompleteTextView
-                android:id="@+id/difficultyDropdown"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:hint="Seleccione el nivel dificultad"
-                android:inputType="none" />
-        </com.google.android.material.textfield.TextInputLayout>
+        <Spinner
+            android:id="@+id/spinnerCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/editCantidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="# Preguntas"
+            android:inputType="number"
+            android:layout_marginBottom="16dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerDificultad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"/>
 
         <Button
-            android:id="@+id/checkConnectionButton"
+            android:id="@+id/btnCheckConexion"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="#2196F3"
-            android:text="Comprueba tu conexión"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content"
+            android:text="Comprobar Conexión"
+            android:backgroundTint="#6C53A2"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp"/>
 
         <Button
-            android:id="@+id/startButton"
+            android:id="@+id/btnComenzar"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:backgroundTint="#2196F3"
-            android:enabled="false"
-            android:text="Comenzar juego"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content"
+            android:text="Comenzar"
+            android:backgroundTint="#BDBDBD"
+            android:textColor="#FFFFFF"
+            android:enabled="false"/>
+
     </LinearLayout>
-</RelativeLayout>
+</ScrollView>

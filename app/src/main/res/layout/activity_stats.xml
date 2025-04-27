@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    android:background="#FFFFFF">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Historial de Juegos"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:id="@+id/layoutHistorial"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
-
-    <Button
-        android:id="@+id/btnVolverInicio"
+    <TextView
+        android:id="@+id/tvCorrectas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nuevo Juego"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="#FFA726"
-        android:layout_marginBottom="100dp"/>
+        android:text="Correctas: 0"
+        android:textSize="20sp"
+        android:textColor="#2E7D32"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/tvIncorrectas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Incorrectas: 0"
+        android:textSize="20sp"
+        android:textColor="#D32F2F"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/tvNoRespondidas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Respondidas: 0"
+        android:textSize="20sp"
+        android:textColor="#FBC02D"
+        android:layout_marginBottom="32dp"/>
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volver a Jugar"
+        android:textColor="#FFFFFF"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"/>
+
 </LinearLayout>
-
-
-
